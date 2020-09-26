@@ -111,7 +111,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => GridPage()));
               },
-            )
+            ),
+            RaisedButton(
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => HomePage()));
+              },
+            ),
           ],
         ),
       ),
@@ -145,6 +151,7 @@ class GridPage extends StatelessWidget {
           name: "Coke",
           price: 1.00,
           image:
+<<<<<<< HEAD
               "https://th.bing.com/th/id/OIP.j8VMQERIDHxKwwAl2iG6OQD6D6?w=148&h=180&c=7&o=5&dpr=1.25&pid=1.7    "),
       Product(
           name: "Sprite",
@@ -241,6 +248,9 @@ class GridPage extends StatelessWidget {
           price: 1.00,
           image:
               "https://th.bing.com/th/id/OIP.j8VMQERIDHxKwwAl2iG6OQD6D6?w=148&h=180&c=7&o=5&dpr=1.25&pid=1.7    ")
+=======
+              "https://www.riteaid.com/shop/media/catalog/product/6/1/613008715267.jpg?quality=80&bg-color=255,255,255&fit=bounds&height=406&width=406&canvas=406:406"),
+>>>>>>> 129d0f66e1fa07f4706deaefb5b51521c5c8a653
     ];
     return Scaffold(
         appBar: AppBar(
@@ -260,7 +270,26 @@ class GridPage extends StatelessWidget {
   }
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  const HomePage({Key key}) : super(key: key);
+
+  @override
+  HomePageState createState() => HomePageState();
+}
+
+class HomePageState extends State<HomePage> {
+  int mealExchanges = 0;
+
+  void addMealExchange(add) {
+    setState(() {
+      if (add) {
+        mealExchanges += 1;
+      } else if (mealExchanges > 0) {
+        mealExchanges -= 1;
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -269,7 +298,33 @@ class HomePage extends StatelessWidget {
         children: <Widget>[
           Text("How many meal exchanges would you like to spend?"),
           Row(
-            children: [Text("1"), Text("2")],
+            children: [
+              Ink(
+                  decoration: const ShapeDecoration(
+                    color: Colors.orange,
+                    shape: CircleBorder(),
+                  ),
+                  child: IconButton(
+                    icon: Icon(Icons.remove),
+                    color: Colors.white,
+                    onPressed: () {
+                      addMealExchange(false);
+                    },
+                  )),
+              Text(mealExchanges.toString()),
+              Ink(
+                  decoration: const ShapeDecoration(
+                    color: Colors.orange,
+                    shape: CircleBorder(),
+                  ),
+                  child: IconButton(
+                    icon: Icon(Icons.add),
+                    color: Colors.white,
+                    onPressed: () {
+                      addMealExchange(true);
+                    },
+                  )),
+            ],
           )
         ],
       ),
