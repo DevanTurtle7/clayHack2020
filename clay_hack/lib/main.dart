@@ -155,6 +155,13 @@ class GridPageState extends State<GridPage> {
     return Scaffold(
         appBar: AppBar(
           title: Text("Grid"),
+          backgroundColor: Colors.orange,
+          actions: [
+            IconButton(
+              icon: Icon(Icons.shopping_cart),
+              onPressed: (){},
+              )
+          ],
         ),
         body: GridView.builder(
             gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
