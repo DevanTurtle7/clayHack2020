@@ -140,7 +140,6 @@ class GridPage extends StatefulWidget {
 }
 
 class GridPageState extends State<GridPage> {
-  
   void updateCount(index, add) {
     setState(() {
       if (add) {
@@ -166,7 +165,7 @@ class GridPageState extends State<GridPage> {
                   Image(
                       image: NetworkImage(food[index].image),
                       width: 200,
-                      height: 80),
+                      height: 130),
                   Text((food[index].name)),
                   Text(("Price: " + food[index].price.toString())),
                   Row(
