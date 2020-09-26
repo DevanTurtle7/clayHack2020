@@ -111,7 +111,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => GridPage()));
               },
-            )
+            ),
+            RaisedButton(
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => HomePage()));
+              },
+            ),
           ],
         ),
       ),
@@ -136,8 +142,16 @@ class GridPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var food = [
-      Product(name: "Arizona", price: 1.00, image: "https://www.riteaid.com/shop/media/catalog/product/6/1/613008715267.jpg?quality=80&bg-color=255,255,255&fit=bounds&height=406&width=406&canvas=406:406"),
-      Product(name: "Coke", price: 1.00, image: "https://www.riteaid.com/shop/media/catalog/product/6/1/613008715267.jpg?quality=80&bg-color=255,255,255&fit=bounds&height=406&width=406&canvas=406:406"),
+      Product(
+          name: "Arizona",
+          price: 1.00,
+          image:
+              "https://www.riteaid.com/shop/media/catalog/product/6/1/613008715267.jpg?quality=80&bg-color=255,255,255&fit=bounds&height=406&width=406&canvas=406:406"),
+      Product(
+          name: "Coke",
+          price: 1.00,
+          image:
+              "https://www.riteaid.com/shop/media/catalog/product/6/1/613008715267.jpg?quality=80&bg-color=255,255,255&fit=bounds&height=406&width=406&canvas=406:406"),
     ];
     return Scaffold(
         appBar: AppBar(
@@ -148,15 +162,35 @@ class GridPage extends StatelessWidget {
                 maxCrossAxisExtent: 200.0),
             itemCount: food.length,
             itemBuilder: (BuildContext context, int index) => Card(
-                  child: Column(children: [Image(
+                    child: Column(children: [
+                  Image(
                     image: NetworkImage(food[index].image),
                   ),
-                  Text((food[index].name)),])
-                )));
+                  Text((food[index].name)),
+                ]))));
   }
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  const HomePage({Key key}) : super(key: key);
+
+  @override
+  HomePageState createState() => HomePageState();
+}
+
+class HomePageState extends State<HomePage> {
+  int mealExchanges = 0;
+
+  void addMealExchange(add) {
+    setState(() {
+      if (add) {
+        mealExchanges += 1;
+      } else if (mealExchanges > 0) {
+        mealExchanges -= 1;
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -165,7 +199,33 @@ class HomePage extends StatelessWidget {
         children: <Widget>[
           Text("How many meal exchanges would you like to spend?"),
           Row(
-            children: [Text("1"), Text("2")],
+            children: [
+              Ink(
+                  decoration: const ShapeDecoration(
+                    color: Colors.orange,
+                    shape: CircleBorder(),
+                  ),
+                  child: IconButton(
+                    icon: Icon(Icons.remove),
+                    color: Colors.white,
+                    onPressed: () {
+                      addMealExchange(false);
+                    },
+                  )),
+              Text(mealExchanges.toString()),
+              Ink(
+                  decoration: const ShapeDecoration(
+                    color: Colors.orange,
+                    shape: CircleBorder(),
+                  ),
+                  child: IconButton(
+                    icon: Icon(Icons.add),
+                    color: Colors.white,
+                    onPressed: () {
+                      addMealExchange(true);
+                    },
+                  )),
+            ],
           )
         ],
       ),
