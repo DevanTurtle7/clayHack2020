@@ -84,8 +84,11 @@ class GridPageState extends State<GridPage> {
             IconButton(
               icon: Icon(Icons.shopping_cart),
               onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => CartPage()));
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            CartPage(mealExchanges: widget.mealExchanges)));
               },
             )
           ],
@@ -256,11 +259,13 @@ class CartPage extends StatefulWidget {
 
 class CartPageState extends State<CartPage> {
   var items = [];
+  double price = 0;
 
   void updateCart() {
     for (int index = 0; index < food.length; index++) {
       if (food[index].count > 0) {
         items.add(index);
+        price += (food[index].count * food[index].price);
       }
     }
   }
@@ -276,7 +281,8 @@ class CartPageState extends State<CartPage> {
         body: Column(
           children: [
             Padding(
-                padding: EdgeInsets.only(left: 10, right: 10, top: 30, bottom: 30),
+                padding:
+                    EdgeInsets.only(left: 10, right: 10, top: 30, bottom: 30),
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -298,7 +304,8 @@ class CartPageState extends State<CartPage> {
                     Product foodItem = food[items[index]];
                     var foodPrice = foodItem.count * foodItem.price;
                     return Padding(
-                        padding: EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
+                        padding: EdgeInsets.only(
+                            left: 10, right: 10, top: 10, bottom: 10),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -311,7 +318,44 @@ class CartPageState extends State<CartPage> {
                           ],
                         ));
                   }),
-            )
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 10, bottom: 10),
+              child: Divider(height: 1),
+            ),
+            Padding(
+                padding: EdgeInsets.all(10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text("Total",
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 25)),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        Text(
+                          "Meal Exchanges: \$" +
+                              (widget.mealExchanges * 9.5).toStringAsFixed(2),
+                          style: TextStyle(fontSize: 25),
+                        ),
+                        Text("Cost: -\$" + price.toStringAsFixed(2),
+                            style: TextStyle(fontSize: 25)),
+                        Padding(
+                            padding: EdgeInsets.all(10),
+                            child: Divider(
+                              height: 1,
+                            )),
+                        Text(
+                            "Remaining: \$" +
+                                ((widget.mealExchanges * 9.5) - price)
+                                    .toStringAsFixed(2),
+                            style: TextStyle(fontSize: 25))
+                      ],
+                    )
+                  ],
+                ))
           ],
         ));
   }
