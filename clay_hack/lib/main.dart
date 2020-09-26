@@ -109,11 +109,6 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (context) => GridPage()));
               },
-            ),
-            RaisedButton(
-              onPressed: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()));
-              },
             )
           ],
         ),
@@ -127,17 +122,15 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-class Product {
-  final String name;
-  final double price;
-
-  Product({this.name, this.price});
-}
-
 class GridPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var food = [2, 3, 4];
+    var food = [
+      'Arizona Tea',
+      'Coke',
+      'Fanta',
+      'Sprite',
+    ];
     return Scaffold(
         appBar: AppBar(
           title: Text("Grid"),
@@ -149,20 +142,5 @@ class GridPage extends StatelessWidget {
           itemBuilder: (BuildContext context, int index) =>
               ListTile(title: Text((food[index].toString()))),
         ));
-  }
-}
-
-class HomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text("Title")),
-      body: Column(children: <Widget> [
-        Text("How many meal exchanges would you like to spend?"),
-        Row(children: [
-          Text("1"), Text("2")
-        ],)
-      ],),
-    );
   }
 }
