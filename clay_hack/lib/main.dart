@@ -341,6 +341,7 @@ class CartPage extends StatefulWidget {
 
 class CartPageState extends State<CartPage> {
   var items = [];
+  double money = 100;
 
   void updateCart() {
     for (int index = 0; index < food.length; index++) {
@@ -362,7 +363,15 @@ class CartPageState extends State<CartPage> {
           itemCount: items.length,
           itemBuilder: (context, index) {
             Product foodItem = food[items[index]];
-            return Text(foodItem.name + ", " + foodItem.count.toString());
+            var foodPrice = foodItem.count * foodItem.price;
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text(foodItem.name.toString()),
+                Text(foodItem.count.toString()),
+                Text(foodPrice.toString())
+              ],
+            );
           }),
     );
   }
