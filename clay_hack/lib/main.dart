@@ -177,7 +177,7 @@ class GridPageState extends State<GridPage> {
     return Scaffold(
         appBar: AppBar(
           title: Text(
-            "Remaining: \$" + money.toString(),
+            "Remaining: \$" + money.toStringAsFixed(2),
             overflow: TextOverflow.fade,
           ),
           backgroundColor: Colors.orange,
