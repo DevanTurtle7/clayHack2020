@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
         // closer together (more dense) than on mobile platforms.
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: HomePage()
     );
   }
 }
@@ -111,7 +111,7 @@ class _MyHomePageState extends State<MyHomePage> {
             RaisedButton(
               onPressed: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => GridPage()));
+                    MaterialPageRoute(builder: (context) => GridPage(mealExchanges: 0,)));
               },
             ),
             RaisedButton(
@@ -133,14 +133,15 @@ class _MyHomePageState extends State<MyHomePage> {
 }
 
 class GridPage extends StatefulWidget {
-  const GridPage({Key key}) : super(key: key);
+  const GridPage({Key key, this.mealExchanges}) : super(key: key);
+
+  final int mealExchanges;
 
   @override
   GridPageState createState() => GridPageState();
 }
 
 class GridPageState extends State<GridPage> {
-  int mealExchanges = 10;
   double money;
 
   void updateCount(index, add) {
@@ -157,7 +158,7 @@ class GridPageState extends State<GridPage> {
 
   void updateRemaining() {
     setState(() {
-      money = (10 * mealExchanges).toDouble();
+      money = (10 * widget.mealExchanges).toDouble();
 
       for (Product product in food) {
         money -= product.count * product.price;
@@ -168,7 +169,7 @@ class GridPageState extends State<GridPage> {
   @override
   Widget build(BuildContext context) {
     if (money == null) {
-      money = (9.5 * mealExchanges).toDouble();
+      money = (9.5 * widget.mealExchanges).toDouble();
     }
     return Scaffold(
         appBar: AppBar(
@@ -265,16 +266,16 @@ class HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Title"),
+        title: Text("Corner Clerk"),
         backgroundColor: Colors.orange,
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Padding(
-              padding: EdgeInsets.only(top: 20, left: 30, right: 30),
+              padding: EdgeInsets.only(top: 50, left: 30, right: 30),
               child: Text("How many meal exchanges would you like to spend?",
-                  style: TextStyle(fontSize: 20))),
+                  textAlign: TextAlign.center, style: TextStyle(fontSize: 20))),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -324,7 +325,10 @@ class HomePageState extends State<HomePage> {
                     padding: EdgeInsets.all(10),
                     child: Text("Next",
                         style: TextStyle(fontSize: 20, color: Colors.white))),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => GridPage(mealExchanges: 0,)));
+                },
               ))
         ],
       ),
@@ -333,7 +337,9 @@ class HomePageState extends State<HomePage> {
 }
 
 class CartPage extends StatefulWidget {
-  const CartPage({Key key}) : super(key: key);
+  const CartPage({Key key, this.mealExchanges}) : super(key: key);
+
+  final int mealExchanges;
 
   @override
   CartPageState createState() => CartPageState();
@@ -341,7 +347,6 @@ class CartPage extends StatefulWidget {
 
 class CartPageState extends State<CartPage> {
   var items = [];
-  double money = 100;
 
   void updateCart() {
     for (int index = 0; index < food.length; index++) {
