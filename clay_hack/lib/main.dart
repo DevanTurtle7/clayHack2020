@@ -127,16 +127,17 @@ class _MyHomePageState extends State<MyHomePage> {
 class Product {
   final String name;
   final double price;
+  final String image;
 
-  Product({this.name, this.price});
+  Product({this.name, this.price, this.image});
 }
- 
+
 class GridPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var food = [
-      Product(name: "Arizona", price: 1.00),
-      Product(name: "Coke", price: 1.00),
+      Product(name: "Arizona", price: 1.00, image: "https://www.riteaid.com/shop/media/catalog/product/6/1/613008715267.jpg?quality=80&bg-color=255,255,255&fit=bounds&height=406&width=406&canvas=406:406"),
+      Product(name: "Coke", price: 1.00, image: "https://www.riteaid.com/shop/media/catalog/product/6/1/613008715267.jpg?quality=80&bg-color=255,255,255&fit=bounds&height=406&width=406&canvas=406:406"),
     ];
     return Scaffold(
         appBar: AppBar(
@@ -146,8 +147,11 @@ class GridPage extends StatelessWidget {
             gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                 maxCrossAxisExtent: 200.0),
             itemCount: food.length,
-            itemBuilder: (BuildContext context, int index) => ListTile(
-                  title: Text((food[index].name)),
+            itemBuilder: (BuildContext context, int index) => Card(
+                  child: Column(children: [Image(
+                    image: NetworkImage(food[index].image),
+                  ),
+                  Text((food[index].name)),])
                 )));
   }
 }
