@@ -104,6 +104,11 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
             ),
+            RaisedButton(
+              onPressed: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => GridPage()));
+              },
+            )
           ],
         ),
       ),
@@ -112,6 +117,17 @@ class _MyHomePageState extends State<MyHomePage> {
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
+    );
+  }
+}
+
+class GridPage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Grid"),
+      ), body: Text("Hello"),
     );
   }
 }
