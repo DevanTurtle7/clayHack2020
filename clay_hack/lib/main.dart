@@ -177,7 +177,10 @@ class GridPageState extends State<GridPage> {
           actions: [
             IconButton(
               icon: Icon(Icons.shopping_cart),
-              onPressed: () {},
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => CartPage()));
+              },
             )
           ],
         ),
