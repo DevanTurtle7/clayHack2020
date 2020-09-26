@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 void main() {
+  debugPaintSizeEnabled = true;
   runApp(MyApp());
 }
 
@@ -133,22 +135,20 @@ class GridPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var food = [
-      'Arizona Tea',
-      'Coke',
-      'Fanta',
-      'Sprite',
+      Product(name: "Arizona", price: 1.00),
+      Product(name: "Coke", price: 1.00),
     ];
     return Scaffold(
         appBar: AppBar(
           title: Text("Grid"),
         ),
         body: GridView.builder(
-          gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-              maxCrossAxisExtent: 200.0),
-          itemCount: food.length,
-          itemBuilder: (BuildContext context, int index) =>
-              ListTile(title: Text((food[index].toString()))),
-        ));
+            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                maxCrossAxisExtent: 200.0),
+            itemCount: food.length,
+            itemBuilder: (BuildContext context, int index) => ListTile(
+                  title: Text((food[index].name)),
+                )));
   }
 }
 
@@ -157,12 +157,14 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Title")),
-      body: Column(children: <Widget> [
-        Text("How many meal exchanges would you like to spend?"),
-        Row(children: [
-          Text("1"), Text("2")
-        ],)
-      ],),
+      body: Column(
+        children: <Widget>[
+          Text("How many meal exchanges would you like to spend?"),
+          Row(
+            children: [Text("1"), Text("2")],
+          )
+        ],
+      ),
     );
   }
 }
