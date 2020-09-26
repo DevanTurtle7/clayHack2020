@@ -75,37 +75,37 @@ var food = [
           "https://th.bing.com/th/id/OIP.9PHkXmBr_RZcdAZcwYCe5QHaHa?w=193&h=193&c=7&o=5&dpr=1.25&pid=1.7"),
   Product(
       name: "Soup",
-      price: 1.00,
+      price: 2.50,
       image:
           "https://th.bing.com/th/id/OIP.2_Zx6-mNSnw4W0aKpHRkGAHaEK?w=276&h=180&c=7&o=5&dpr=1.25&pid=1.7"),
   Product(
       name: "Candy",
-      price: 1.00,
+      price: 1.75,
       image:
           "https://th.bing.com/th/id/OIP.asXyUcJKgdRxmFrLmE7RjQHaHa?w=209&h=209&c=7&o=5&dpr=1.25&pid=1.7"),
   Product(
       name: "Chips",
-      price: 1.00,
+      price: 1.75,
       image:
           "https://th.bing.com/th/id/OIP.YQbSmyEQph4Y_hP01OEzcgHaE8?w=181&h=141&c=7&o=5&dpr=1.25&pid=1.7"),
   Product(
       name: "Pretzels",
-      price: 1.00,
+      price: 1.75,
       image:
           "https://th.bing.com/th/id/OP.8bGhzagT4fjPDA474C474?w=160&h=150&rs=1&o=5&dpr=1.25&pid=21.1"),
   Product(
       name: "Cookies",
-      price: 1.00,
+      price: 1.25,
       image:
           "https://th.bing.com/th/id/OIP.Xe47pE1VHcwekD809pEZ6wHaE8?w=261&h=180&c=7&o=5&dpr=1.25&pid=1.7"),
   Product(
       name: "Donuts",
-      price: 1.00,
+      price: 2.00,
       image:
           "https://th.bing.com/th/id/OIP.osmPNdu3wLCnIys8dQxMKgHaE8?w=276&h=184&c=7&o=5&dpr=1.25&pid=1.7"),
   Product(
       name: "Hot Pockets",
-      price: 1.00,
+      price: 3.25,
       image:
           "https://th.bing.com/th/id/OIP.43OWDYZNY9muqlyi8o0pjAHaHa?w=155&h=180&c=7&o=5&dpr=1.25&pid=1.7")
 ];
