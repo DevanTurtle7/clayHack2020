@@ -131,7 +131,7 @@ class Product {
 
   Product({this.name, this.price, this.image});
 }
-
+ 
 class GridPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
