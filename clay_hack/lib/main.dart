@@ -105,8 +105,9 @@ class _MyHomePageState extends State<MyHomePage> {
               style: Theme.of(context).textTheme.headline4,
             ),
             RaisedButton(
-              onPressed: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => GridPage()));
+              onPressed: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => GridPage()));
               },
             )
           ],
@@ -124,10 +125,17 @@ class _MyHomePageState extends State<MyHomePage> {
 class GridPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var food = [2, 3, 4];
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Grid"),
-      ), body: Text("Hello"),
-    );
+        appBar: AppBar(
+          title: Text("Grid"),
+        ),
+        body: GridView.builder(
+          gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: 200.0),
+          itemCount: food.length,
+          itemBuilder: (BuildContext context, int index) =>
+              ListTile(title: Text((food[index].toString()))),
+        ));
   }
 }
