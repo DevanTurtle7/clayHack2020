@@ -134,6 +134,7 @@ class Product {
   final String name;
   final double price;
   final String image;
+  var count = 0;
 
   Product({this.name, this.price, this.image});
 }
@@ -146,9 +147,7 @@ class GridPage extends StatefulWidget {
 }
 
 class GridPageState extends State<GridPage> {
-  @override
-  Widget build(BuildContext context) {
-    var food = [
+      var food = [
       Product(
           name: "Arizona",
           price: 1.00,
@@ -250,6 +249,20 @@ class GridPageState extends State<GridPage> {
           image:
               "https://th.bing.com/th/id/OIP.43OWDYZNY9muqlyi8o0pjAHaHa?w=155&h=180&c=7&o=5&dpr=1.25&pid=1.7")
     ];
+
+  void updateCount(index, add) {
+    setState(() {
+      if (add) {
+        food[index].count += 1;
+      } else if (food[index].count > 0) {
+        food[index].count -= 1;
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+
     return Scaffold(
         appBar: AppBar(
           title: Text("Grid"),
@@ -263,9 +276,50 @@ class GridPageState extends State<GridPage> {
                   Image(
                       image: NetworkImage(food[index].image),
                       width: 200,
-                      height: 150),
+                      height: 10),
                   Text((food[index].name)),
-                  Text((food[index].price.toString()))
+                  Text((food[index].price.toString())),
+                  Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Ink(
+                height: 30,
+                width: 30,
+                  decoration: const ShapeDecoration(
+                    color: Colors.orange,
+                    shape: CircleBorder(),
+                  ),
+                  child: IconButton(
+                    padding: EdgeInsets.all(0.0),
+                    icon: Icon(Icons.remove, size: 20),
+                    color: Colors.white,
+                    onPressed: () {
+                      updateCount(index, false);
+                    },
+                  )),
+              Padding(
+                  padding: EdgeInsets.only(left: 20, right: 20),
+                  child: Text(
+                    food[index].count.toString(),
+                    style: TextStyle(fontSize: 90.0),
+                  )),
+              Ink(
+                height: 30,
+                width: 30,
+                  decoration: const ShapeDecoration(
+                    color: Colors.orange,
+                    shape: CircleBorder(),
+                  ),
+                  child: IconButton(
+                    padding: EdgeInsets.all(0.0),
+                    icon: Icon(Icons.add, size: 20),
+                    color: Colors.white,
+                    onPressed: () {
+                      updateCount(index, true);
+                    },
+                  )),
+            ],
+          ),
                 ]))));
   }
 }
