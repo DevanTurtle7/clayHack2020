@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 void main() {
-  debugPaintSizeEnabled = true;
+  debugPaintSizeEnabled = false;
   runApp(MyApp());
 }
 
@@ -289,38 +289,60 @@ class HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Title")),
+      appBar: AppBar(title: Text("Title"), backgroundColor: Colors.orange,),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Text("How many meal exchanges would you like to spend?"),
+          Padding(
+            padding: EdgeInsets.only(top: 20, left: 30, right: 30),
+            child: Text("How many meal exchanges would you like to spend?", style: TextStyle(fontSize: 20))),
           Row(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Ink(
+                height: 30,
+                width: 30,
                   decoration: const ShapeDecoration(
                     color: Colors.orange,
                     shape: CircleBorder(),
                   ),
                   child: IconButton(
-                    icon: Icon(Icons.remove),
+                    padding: EdgeInsets.all(0.0),
+                    icon: Icon(Icons.remove, size: 20),
                     color: Colors.white,
                     onPressed: () {
                       addMealExchange(false);
                     },
                   )),
-              Text(mealExchanges.toString()),
+              Padding(
+                  padding: EdgeInsets.only(left: 20, right: 20),
+                  child: Text(
+                    mealExchanges.toString(),
+                    style: TextStyle(fontSize: 90.0),
+                  )),
               Ink(
+                height: 30,
+                width: 30,
                   decoration: const ShapeDecoration(
                     color: Colors.orange,
                     shape: CircleBorder(),
                   ),
                   child: IconButton(
-                    icon: Icon(Icons.add),
+                    padding: EdgeInsets.all(0.0),
+                    icon: Icon(Icons.add, size: 20),
                     color: Colors.white,
                     onPressed: () {
                       addMealExchange(true);
                     },
                   )),
             ],
+          ),
+          RaisedButton(
+            color: Colors.orange,
+            child: Padding(
+              padding: EdgeInsets.all(10),
+              child:Text("Next", style: TextStyle(fontSize: 20))),
+            onPressed: (){},
           )
         ],
       ),
