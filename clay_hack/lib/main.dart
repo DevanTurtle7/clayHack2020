@@ -322,7 +322,8 @@ class HomePageState extends State<HomePage> {
                 color: Colors.orange,
                 child: Padding(
                     padding: EdgeInsets.all(10),
-                    child: Text("Next", style: TextStyle(fontSize: 20, color: Colors.white))),
+                    child: Text("Next",
+                        style: TextStyle(fontSize: 20, color: Colors.white))),
                 onPressed: () {},
               ))
         ],
@@ -344,22 +345,25 @@ class CartPageState extends State<CartPage> {
   void updateCart() {
     for (int index = 0; index < food.length; index++) {
       if (food[index].count > 0) {
-        items.add([index, food[index].count]);
+        items.add(index);
       }
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
+    updateCart();
     return Scaffold(
-      appBar: AppBar(title: Text("Cart"), backgroundColor: Colors.orange,),
-      body: ListView.builder(
-        itemCount: items.length,
-        itemBuilder: (context, index) {
-          return Text(items[index][0] + ", " + items[index][1]);
-        }
+      appBar: AppBar(
+        title: Text("Cart"),
+        backgroundColor: Colors.orange,
       ),
+      body: ListView.builder(
+          itemCount: items.length,
+          itemBuilder: (context, index) {
+            Product foodItem = food[items[index]];
+            return Text(foodItem.name + ", " + foodItem.count.toString());
+          }),
     );
   }
 }
