@@ -339,11 +339,27 @@ class CartPage extends StatefulWidget {
 }
 
 class CartPageState extends State<CartPage> {
+  var items = [];
+
+  void updateCart() {
+    for (int index = 0; index < food.length; index++) {
+      if (food[index].count > 0) {
+        items.add([index, food[index].count]);
+      }
+    }
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Cart"), backgroundColor: Colors.orange,),
-      body: Text("Cart"),
+      body: ListView.builder(
+        itemCount: items.length,
+        itemBuilder: (context, index) {
+          return Text(items[index][0] + ", " + items[index][1]);
+        }
+      ),
     );
   }
 }
