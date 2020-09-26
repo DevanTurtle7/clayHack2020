@@ -151,7 +151,102 @@ class GridPage extends StatelessWidget {
           name: "Coke",
           price: 1.00,
           image:
-              "https://www.riteaid.com/shop/media/catalog/product/6/1/613008715267.jpg?quality=80&bg-color=255,255,255&fit=bounds&height=406&width=406&canvas=406:406"),
+              "https://th.bing.com/th/id/OIP.j8VMQERIDHxKwwAl2iG6OQD6D6?w=148&h=180&c=7&o=5&dpr=1.25&pid=1.7    "),
+      Product(
+          name: "Sprite",
+          price: 1.00,
+          image:
+              "https://th.bing.com/th/id/OIP.Ud1jpVK6c7KXKavFP9QAsgAAAA?w=137&h=150&c=7&o=5&dpr=1.25&pid=1.7"),
+      Product(
+          name: "Fanta",
+          price: 1.00,
+          image:
+              "https://th.bing.com/th/id/OIP.j8VMQERIDHxKwwAl2iG6OQD6D6?w=148&h=180&c=7&o=5&dpr=1.25&pid=1.7    "),
+      Product(
+          name: "Milk",
+          price: 1.00,
+          image:
+              "https://th.bing.com/th/id/OIP.PILBMXnk6Dd0Ohm11Cp2mwHaHa?w=197&h=197&c=7&o=5&dpr=1.25&pid=1.7"),
+      Product(
+          name: "Juice",
+          price: 1.00,
+          image:
+              "https://i5.walmartimages.com/asr/4436eb83-e8e7-40d9-a80f-67f0a8c96364_1.6c2ce7267ef33c75bed2e674c19d6aa4.jpeg"),
+      Product(
+          name: "Bread",
+          price: 1.00,
+          image:
+              "https://th.bing.com/th?q=Sliced+Bread&w=120&h=120&c=1&rs=1&qlt=90&cb=1&dpr=1.25&pid=InlineBlock&mkt=en-US&adlt=moderate&t=1&mw=247"),
+      Product(
+          name: "Bagel",
+          price: 1.00,
+          image:
+              "https://th.bing.com/th/id/OIP.SzWppaNNEKA5qinEBX-OGwHaFy?w=237&h=186&c=7&o=5&dpr=1.25&pid=1.7"),
+      Product(
+          name: "Wrap",
+          price: 1.00,
+          image:
+              "https://th.bing.com/th/id/OIP.j8VMQERIDHxKwwAl2iG6OQD6D6?w=148&h=180&c=7&o=5&dpr=1.25&pid=1.7    "),
+      Product(
+          name: "Fresh Produce",
+          price: 1.00,
+          image:
+              "https://th.bing.com/th/id/OIP.j8VMQERIDHxKwwAl2iG6OQD6D6?w=148&h=180&c=7&o=5&dpr=1.25&pid=1.7    "),
+      Product(
+          name: "Breakfast Sandwich",
+          price: 1.00,
+          image:
+              "https://th.bing.com/th/id/OIP.j8VMQERIDHxKwwAl2iG6OQD6D6?w=148&h=180&c=7&o=5&dpr=1.25&pid=1.7    "),
+      Product(
+          name: "Frozen Entree",
+          price: 1.00,
+          image:
+              "https://th.bing.com/th/id/OIP.j8VMQERIDHxKwwAl2iG6OQD6D6?w=148&h=180&c=7&o=5&dpr=1.25&pid=1.7    "),
+      Product(
+          name: "Deli Meat",
+          price: 1.00,
+          image:
+              "https://th.bing.com/th/id/OIP.j8VMQERIDHxKwwAl2iG6OQD6D6?w=148&h=180&c=7&o=5&dpr=1.25&pid=1.7    "),
+      Product(
+          name: "Cereal",
+          price: 1.00,
+          image:
+              "https://th.bing.com/th/id/OIP.j8VMQERIDHxKwwAl2iG6OQD6D6?w=148&h=180&c=7&o=5&dpr=1.25&pid=1.7    "),
+      Product(
+          name: "Soup",
+          price: 1.00,
+          image:
+              "https://th.bing.com/th/id/OIP.j8VMQERIDHxKwwAl2iG6OQD6D6?w=148&h=180&c=7&o=5&dpr=1.25&pid=1.7    "),
+      Product(
+          name: "Candy",
+          price: 1.00,
+          image:
+              "https://th.bing.com/th/id/OIP.j8VMQERIDHxKwwAl2iG6OQD6D6?w=148&h=180&c=7&o=5&dpr=1.25&pid=1.7    "),
+      Product(
+          name: "Chips",
+          price: 1.00,
+          image:
+              "https://th.bing.com/th/id/OIP.j8VMQERIDHxKwwAl2iG6OQD6D6?w=148&h=180&c=7&o=5&dpr=1.25&pid=1.7    "),
+      Product(
+          name: "Pretzels",
+          price: 1.00,
+          image:
+              "https://th.bing.com/th/id/OIP.j8VMQERIDHxKwwAl2iG6OQD6D6?w=148&h=180&c=7&o=5&dpr=1.25&pid=1.7    "),
+      Product(
+          name: "Cookies",
+          price: 1.00,
+          image:
+              "https://th.bing.com/th/id/OIP.j8VMQERIDHxKwwAl2iG6OQD6D6?w=148&h=180&c=7&o=5&dpr=1.25&pid=1.7    "),
+      Product(
+          name: "Donuts",
+          price: 1.00,
+          image:
+              "https://th.bing.com/th/id/OIP.j8VMQERIDHxKwwAl2iG6OQD6D6?w=148&h=180&c=7&o=5&dpr=1.25&pid=1.7    "),
+      Product(
+          name: "Hot Pockets",
+          price: 1.00,
+          image:
+              "https://th.bing.com/th/id/OIP.j8VMQERIDHxKwwAl2iG6OQD6D6?w=148&h=180&c=7&o=5&dpr=1.25&pid=1.7    ")
     ];
     return Scaffold(
         appBar: AppBar(
