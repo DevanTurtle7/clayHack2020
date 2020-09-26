@@ -138,7 +138,14 @@ class Product {
   Product({this.name, this.price, this.image});
 }
 
-class GridPage extends StatelessWidget {
+class GridPage extends StatefulWidget {
+  const GridPage({Key key}) : super(key: key);
+
+  @override
+  GridPageState createState() => GridPageState();
+}
+
+class GridPageState extends State<GridPage> {
   @override
   Widget build(BuildContext context) {
     var food = [
@@ -334,12 +341,16 @@ class HomePageState extends State<HomePage> {
                   )),
             ],
           ),
+          Padding(
+            padding: EdgeInsets.only(bottom: 50),
+            child:
           RaisedButton(
             color: Colors.orange,
             child: Padding(
               padding: EdgeInsets.all(10),
               child:Text("Next", style: TextStyle(fontSize: 20))),
             onPressed: (){},
+          )
           )
         ],
       ),
