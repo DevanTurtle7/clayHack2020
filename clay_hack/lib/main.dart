@@ -276,7 +276,7 @@ class CartPageState extends State<CartPage> {
         body: Column(
           children: [
             Padding(
-                padding: EdgeInsets.only(left: 10, right: 10),
+                padding: EdgeInsets.only(left: 10, right: 10, top: 30, bottom: 30),
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -298,7 +298,7 @@ class CartPageState extends State<CartPage> {
                     Product foodItem = food[items[index]];
                     var foodPrice = foodItem.count * foodItem.price;
                     return Padding(
-                        padding: EdgeInsets.only(left: 10, right: 10),
+                        padding: EdgeInsets.only(left: 10, right: 10, top: 10, bottom: 10),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
