@@ -167,10 +167,12 @@ class GridPageState extends State<GridPage> {
 
   @override
   Widget build(BuildContext context) {
-    money = (10 * mealExchanges).toDouble();
+    if (money == null) {
+      money = (9.5 * mealExchanges).toDouble();
+    }
     return Scaffold(
         appBar: AppBar(
-          title: Text("Remaining: " + money.toString(),
+          title: Text("Remaining: \$" + money.toString()),
           backgroundColor: Colors.orange,
           actions: [
             IconButton(
@@ -190,7 +192,7 @@ class GridPageState extends State<GridPage> {
                       width: 200,
                       height: 130),
                   Text((food[index].name)),
-                  Text(("Price: " + food[index].price.toString())),
+                  Text(("Price: \$" + food[index].price.toString())),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
