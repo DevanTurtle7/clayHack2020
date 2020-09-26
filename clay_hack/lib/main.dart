@@ -176,7 +176,10 @@ class GridPageState extends State<GridPage> {
     }
     return Scaffold(
         appBar: AppBar(
-          title: Text("Remaining: \$" + money.toString()),
+          title: Text(
+            "Remaining: \$" + money.toString(),
+            overflow: TextOverflow.fade,
+          ),
           backgroundColor: Colors.orange,
           actions: [
             IconButton(
@@ -367,25 +370,50 @@ class CartPageState extends State<CartPage> {
   Widget build(BuildContext context) {
     updateCart();
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Cart"),
-        backgroundColor: Colors.orange,
-      ),
-      body: ListView.builder(
-          itemCount: items.length,
-          itemBuilder: (context, index) {
-            Product foodItem = food[items[index]];
-            var foodPrice = foodItem.count * foodItem.price;
-            return Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                Text(foodItem.name.toString(), style: TextStyle(fontSize: 20)),
-                Text(foodItem.count.toString(), style: TextStyle(fontSize: 20)),
-                Text("\$" + foodPrice.toString(),
-                    style: TextStyle(fontSize: 20))
-              ],
-            );
-          }),
-    );
+        appBar: AppBar(
+          title: Text("Cart"),
+          backgroundColor: Colors.orange,
+        ),
+        body: Column(
+          children: [
+            Padding(
+                padding: EdgeInsets.only(left: 10, right: 10),
+                child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Item",
+                          style: TextStyle(
+                              fontSize: 25, fontWeight: FontWeight.bold)),
+                      Text("Count",
+                          style: TextStyle(
+                              fontSize: 25, fontWeight: FontWeight.bold)),
+                      Text("Price",
+                          style: TextStyle(
+                              fontSize: 25, fontWeight: FontWeight.bold)),
+                    ])),
+            Container(
+              height: 400,
+              child: ListView.builder(
+                  itemCount: items.length,
+                  itemBuilder: (context, index) {
+                    Product foodItem = food[items[index]];
+                    var foodPrice = foodItem.count * foodItem.price;
+                    return Padding(
+                        padding: EdgeInsets.only(left: 10, right: 10),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(foodItem.name.toString(),
+                                style: TextStyle(fontSize: 20)),
+                            Text(foodItem.count.toString(),
+                                style: TextStyle(fontSize: 20)),
+                            Text("\$" + foodPrice.toString(),
+                                style: TextStyle(fontSize: 20))
+                          ],
+                        ));
+                  }),
+            )
+          ],
+        ));
   }
 }
