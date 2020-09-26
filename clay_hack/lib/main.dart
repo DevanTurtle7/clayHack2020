@@ -140,6 +140,9 @@ class GridPage extends StatefulWidget {
 }
 
 class GridPageState extends State<GridPage> {
+  int mealExchanges = 10;
+  double money;
+
   void updateCount(index, add) {
     setState(() {
       if (add) {
@@ -147,20 +150,33 @@ class GridPageState extends State<GridPage> {
       } else if (food[index].count > 0) {
         food[index].count -= 1;
       }
+
+      updateRemaining();
+    });
+  }
+
+  void updateRemaining() {
+    setState(() {
+      money = (10 * mealExchanges).toDouble();
+
+      for (Product product in food) {
+        money -= product.count * product.price;
+      }
     });
   }
 
   @override
   Widget build(BuildContext context) {
+    money = (10 * mealExchanges).toDouble();
     return Scaffold(
         appBar: AppBar(
-          title: Text("Grid"),
+          title: Text("Remaining: " + money.toString(),
           backgroundColor: Colors.orange,
           actions: [
             IconButton(
               icon: Icon(Icons.shopping_cart),
-              onPressed: (){},
-              )
+              onPressed: () {},
+            )
           ],
         ),
         body: GridView.builder(
