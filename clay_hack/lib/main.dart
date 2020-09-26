@@ -319,11 +319,28 @@ class HomePageState extends State<HomePage> {
                 color: Colors.orange,
                 child: Padding(
                     padding: EdgeInsets.all(10),
-                    child: Text("Next", style: TextStyle(fontSize: 20))),
+                    child: Text("Next", style: TextStyle(fontSize: 20, color: Colors.white))),
                 onPressed: () {},
               ))
         ],
       ),
+    );
+  }
+}
+
+class CartPage extends StatefulWidget {
+  const CartPage({Key key}) : super(key: key);
+
+  @override
+  CartPageState createState() => CartPageState();
+}
+
+class CartPageState extends State<CartPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Cart"),),
+      body: Text("Cart"),
     );
   }
 }
