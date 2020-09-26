@@ -122,6 +122,13 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
+class Product {
+  final String name;
+  final double price;
+
+  Product({this.name, this.price});
+}
+
 class GridPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -142,5 +149,20 @@ class GridPage extends StatelessWidget {
           itemBuilder: (BuildContext context, int index) =>
               ListTile(title: Text((food[index].toString()))),
         ));
+  }
+}
+
+class HomePage extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Title")),
+      body: Column(children: <Widget> [
+        Text("How many meal exchanges would you like to spend?"),
+        Row(children: [
+          Text("1"), Text("2")
+        ],)
+      ],),
+    );
   }
 }
