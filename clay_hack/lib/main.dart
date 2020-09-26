@@ -367,9 +367,10 @@ class CartPageState extends State<CartPage> {
             return Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Text(foodItem.name.toString()),
-                Text(foodItem.count.toString()),
-                Text(foodPrice.toString())
+                Text(foodItem.name.toString(), style: TextStyle(fontSize: 20)),
+                Text(foodItem.count.toString(), style: TextStyle(fontSize: 20)),
+                Text("\$" + foodPrice.toString(),
+                    style: TextStyle(fontSize: 20))
               ],
             );
           }),
