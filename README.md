@@ -2,7 +2,7 @@
 ## Purpose
 Shopping at the corner store can be difficult; you have to keep track of your meal exchanges, find what you're looking for, and sometimes the prices aren't even listed! Corner Clerk conveniently lists every item at the corner store and keeps track of your money for you.
 
-## How I built it
+## How we built it
 Devan and Jose built corner clerk using Flutter, a software development framework by Google. We chose flutter because it allowed us to easily and rapidly develop the app for both iOS and Android with a single code base. Additionally, the hot reload feature sped up development and allowed us to make fine tuned changes very quickly.
 
 ## Accomplishments that I'm proud of
