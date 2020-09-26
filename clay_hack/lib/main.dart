@@ -137,7 +137,7 @@ class Product {
 class GridPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    var food = [2, 3, 4];
+    var food = [];
     return Scaffold(
         appBar: AppBar(
           title: Text("Grid"),
