@@ -282,7 +282,7 @@ class CartPageState extends State<CartPage> {
           children: [
             Padding(
                 padding:
-                    EdgeInsets.only(left: 10, right: 10, top: 30, bottom: 30),
+                    EdgeInsets.only(left: 10, right: 10, top: 30, bottom: 10),
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
