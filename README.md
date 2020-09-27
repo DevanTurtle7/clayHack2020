@@ -1,4 +1,5 @@
 # Clay Hack 2020 - Corner Clerk
+Checkout the devpost page [here](https://devpost.com/software/corner-clerk)
 ## Purpose
 Shopping at the corner store can be difficult; you have to keep track of your meal exchanges, find what you're looking for, and sometimes the prices aren't even listed! Corner Clerk conveniently lists every item at the corner store and keeps track of your money for you.
 
