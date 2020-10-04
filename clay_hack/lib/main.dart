@@ -47,7 +47,7 @@ class GridPageState extends State<GridPage> {
 
   void updateRemaining() {
     setState(() {
-      money = (10 * widget.mealExchanges).toDouble();
+      money = (9.5 * widget.mealExchanges).toDouble();
 
       for (Product product in food) {
         money -= product.count * product.price;
@@ -258,6 +258,7 @@ class CartPageState extends State<CartPage> {
     for (int index = 0; index < food.length; index++) {
       if (food[index].count > 0) {
         items.add(index);
+        print(food[index].price);
         price += (food[index].count * food[index].price);
       }
     }
