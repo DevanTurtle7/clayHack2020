@@ -288,8 +288,7 @@ class CartPageState extends State<CartPage> {
                           style: TextStyle(
                               fontSize: 25, fontWeight: FontWeight.bold)),
                     ])),
-            Container(
-              height: 400,
+            Expanded(
               child: ListView.builder(
                   itemCount: items.length,
                   itemBuilder: (context, index) {
