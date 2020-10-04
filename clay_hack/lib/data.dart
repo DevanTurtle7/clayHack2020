@@ -36,5 +36,17 @@ var food = [
     name: "Nissin Spicy Chicken Chow Mein",
     price: 1.29,
     image: "https://d2lhip1ki8p4nk.cloudfront.net/uploads/products/chow-mein/flavors/Chow_Mein_Spicy_Chicken_Front_328x287.png?mtime=20191210211801"
+  ), Product(
+    name: "GFuel",
+    price: 2.59,
+    image: "https://cdn.shopify.com/s/files/1/0223/3113/products/web_size_cans_00001_grande_fb37331e-88a2-4233-9129-0550e4aae623.png?v=1562457156"
+  ), Product(
+    name: "Dasani 24 Pack",
+    price: 13.49,
+    image: "https://cdn.cnetcontent.com/syndication/mediaserverredirect/5c7b87c6d54ed9839a5a6d6bdec9aedb/original.jpg"
+  ), Product(
+    name: "Oreo DoubleStuf",
+    price: 5.59,
+    image: "https://www.dollargeneral.com/media/catalog/product/cache/6e5ff7de2a46bb5e4325e62839d28016/1/2/12424802_oreo_doublestuf_15.35oz_main.jpg"
   )
 ];
