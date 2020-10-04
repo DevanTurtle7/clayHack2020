@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import "data.dart";
+import 'package:firebase_core/firebase_core.dart';
 
 void main() {
   debugPaintSizeEnabled = false;
