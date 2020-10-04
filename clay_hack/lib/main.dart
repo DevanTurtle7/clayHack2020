@@ -86,60 +86,58 @@ class GridPageState extends State<GridPage> {
             itemCount: food.length,
             itemBuilder: (BuildContext context, int index) => Card(
                     child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                  Expanded(
-                    child:
-                  Image(
-                      image: NetworkImage(food[index].image),
-                      width: 200)),
-                  Text((food[index].name)),
-                  Text(("Price: \$" + food[index].price.toString())),
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 10),
-                    child:
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Ink(
-                          height: 20,
-                          width: 20,
-                          decoration: const ShapeDecoration(
-                            color: Colors.orange,
-                            shape: CircleBorder(),
-                          ),
-                          child: IconButton(
-                            padding: EdgeInsets.all(0.0),
-                            icon: Icon(Icons.remove, size: 20),
-                            color: Colors.white,
-                            onPressed: () {
-                              updateCount(index, false);
-                            },
-                          )),
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                      Expanded(
+                          child: Image(
+                              image: NetworkImage(food[index].image),
+                              width: 200)),
+                      Text((food[index].name)),
+                      Text(("Price: \$" + food[index].price.toString())),
                       Padding(
-                          padding: EdgeInsets.only(left: 20, right: 20),
-                          child: Text(
-                            food[index].count.toString(),
-                            style: TextStyle(fontSize: 30.0),
+                          padding: EdgeInsets.only(bottom: 10),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Ink(
+                                  height: 20,
+                                  width: 20,
+                                  decoration: const ShapeDecoration(
+                                    color: Colors.orange,
+                                    shape: CircleBorder(),
+                                  ),
+                                  child: IconButton(
+                                    padding: EdgeInsets.all(0.0),
+                                    icon: Icon(Icons.remove, size: 20),
+                                    color: Colors.white,
+                                    onPressed: () {
+                                      updateCount(index, false);
+                                    },
+                                  )),
+                              Padding(
+                                  padding: EdgeInsets.only(left: 20, right: 20),
+                                  child: Text(
+                                    food[index].count.toString(),
+                                    style: TextStyle(fontSize: 30.0),
+                                  )),
+                              Ink(
+                                  height: 20,
+                                  width: 20,
+                                  decoration: const ShapeDecoration(
+                                    color: Colors.orange,
+                                    shape: CircleBorder(),
+                                  ),
+                                  child: IconButton(
+                                    padding: EdgeInsets.all(0.0),
+                                    icon: Icon(Icons.add, size: 20),
+                                    color: Colors.white,
+                                    onPressed: () {
+                                      updateCount(index, true);
+                                    },
+                                  )),
+                            ],
                           )),
-                      Ink(
-                          height: 20,
-                          width: 20,
-                          decoration: const ShapeDecoration(
-                            color: Colors.orange,
-                            shape: CircleBorder(),
-                          ),
-                          child: IconButton(
-                            padding: EdgeInsets.all(0.0),
-                            icon: Icon(Icons.add, size: 20),
-                            color: Colors.white,
-                            onPressed: () {
-                              updateCount(index, true);
-                            },
-                          )),
-                    ],
-                  )),
-                ]))));
+                    ]))));
   }
 }
 
@@ -280,10 +278,10 @@ class CartPageState extends State<CartPage> {
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("Item",
+                      Text("Count",
                           style: TextStyle(
                               fontSize: 25, fontWeight: FontWeight.bold)),
-                      Text("Count",
+                      Text("Item",
                           style: TextStyle(
                               fontSize: 25, fontWeight: FontWeight.bold)),
                       Text("Price",
@@ -303,12 +301,26 @@ class CartPageState extends State<CartPage> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(foodItem.name.toString(),
-                                style: TextStyle(fontSize: 20)),
-                            Text(foodItem.count.toString(),
-                                style: TextStyle(fontSize: 20)),
-                            Text("\$" + foodPrice.toString(),
-                                style: TextStyle(fontSize: 20))
+                            Padding(
+                              padding: EdgeInsets.only(left: 15, right: 25),
+                              child:
+                            Text(
+                              foodItem.count.toStringAsFixed(0),
+                              style: TextStyle(fontSize: 20),
+                              textAlign: TextAlign.center,
+                            )),
+                            Expanded(
+                              flex: 3,
+                                child: Align(
+                                  alignment: Alignment.center,
+                                  child:Text(foodItem.name.toString(),
+                                    overflow: TextOverflow.fade,
+                                    style: TextStyle(fontSize: 20)))),
+                                Padding(
+                                  padding: EdgeInsets.only(left: 25, right: 15),
+                                  child:
+                                Text("\$" + foodPrice.toStringAsFixed(2),
+                                    style: TextStyle(fontSize: 20)))
                           ],
                         ));
                   }),
