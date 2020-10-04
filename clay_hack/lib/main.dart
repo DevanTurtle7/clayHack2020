@@ -85,13 +85,19 @@ class GridPageState extends State<GridPage> {
                 maxCrossAxisExtent: 300.0),
             itemCount: food.length,
             itemBuilder: (BuildContext context, int index) => Card(
-                    child: Column(children: [
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                  Expanded(
+                    child:
                   Image(
                       image: NetworkImage(food[index].image),
-                      width: 200,
-                      height: 130),
+                      width: 200)),
                   Text((food[index].name)),
                   Text(("Price: \$" + food[index].price.toString())),
+                  Padding(
+                    padding: EdgeInsets.only(bottom: 10),
+                    child:
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -132,7 +138,7 @@ class GridPageState extends State<GridPage> {
                             },
                           )),
                     ],
-                  ),
+                  )),
                 ]))));
   }
 }
