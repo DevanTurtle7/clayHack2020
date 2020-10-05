@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import "data.dart";
 import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-void main() {
+final database = Firestore.instance;
+
+void main() async {
   debugPaintSizeEnabled = false;
   runApp(MyApp());
 }
@@ -61,84 +64,106 @@ class GridPageState extends State<GridPage> {
     if (money == null) {
       money = (9.5 * widget.mealExchanges).toDouble();
     }
+    /*
+    return Scaffold(body: FutureBuilder(
+      future: Firestore.instance.collection("products").getDocuments(),
+      builder: (BuildContext context, AsyncSnapshot snapshot) {
+        print(snapshot.data.documents[0]);
+        return Text(snapshot.data.documents[0]["image"].toString());
+      }
+    ),);   */
     return Scaffold(
-        appBar: AppBar(
-          title: Text(
-            "Remaining: \$" + money.toStringAsFixed(2),
-            overflow: TextOverflow.fade,
-          ),
-          backgroundColor: Colors.orange,
-          actions: [
-            IconButton(
-              icon: Icon(Icons.shopping_cart),
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            CartPage(mealExchanges: widget.mealExchanges)));
-              },
-            )
-          ],
+      appBar: AppBar(
+        title: Text(
+          "Remaining: \$" + money.toStringAsFixed(2),
+          overflow: TextOverflow.fade,
         ),
-        body: GridView.builder(
-            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                maxCrossAxisExtent: 300.0),
-            itemCount: food.length,
-            itemBuilder: (BuildContext context, int index) => Card(
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                      Expanded(
-                          child: Image(
-                              image: NetworkImage(food[index].image),
-                              width: 200)),
-                      Text((food[index].name)),
-                      Text(("Price: \$" + food[index].price.toString())),
-                      Padding(
-                          padding: EdgeInsets.only(bottom: 10),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Ink(
-                                  height: 20,
-                                  width: 20,
-                                  decoration: const ShapeDecoration(
-                                    color: Colors.orange,
-                                    shape: CircleBorder(),
-                                  ),
-                                  child: IconButton(
-                                    padding: EdgeInsets.all(0.0),
-                                    icon: Icon(Icons.remove, size: 20),
-                                    color: Colors.white,
-                                    onPressed: () {
-                                      updateCount(index, false);
-                                    },
-                                  )),
-                              Padding(
-                                  padding: EdgeInsets.only(left: 20, right: 20),
-                                  child: Text(
-                                    food[index].count.toString(),
-                                    style: TextStyle(fontSize: 30.0),
-                                  )),
-                              Ink(
-                                  height: 20,
-                                  width: 20,
-                                  decoration: const ShapeDecoration(
-                                    color: Colors.orange,
-                                    shape: CircleBorder(),
-                                  ),
-                                  child: IconButton(
-                                    padding: EdgeInsets.all(0.0),
-                                    icon: Icon(Icons.add, size: 20),
-                                    color: Colors.white,
-                                    onPressed: () {
-                                      updateCount(index, true);
-                                    },
-                                  )),
-                            ],
-                          )),
-                    ]))));
+        backgroundColor: Colors.orange,
+        actions: [
+          IconButton(
+            icon: Icon(Icons.shopping_cart),
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          CartPage(mealExchanges: widget.mealExchanges)));
+            },
+          )
+        ],
+      ),
+      body: FutureBuilder(
+          future: Firestore.instance.collection("products").getDocuments(),
+          builder: (BuildContext context, AsyncSnapshot snapshot) {
+            return GridView.builder(
+                gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                    maxCrossAxisExtent: 300.0),
+                itemCount: snapshot.data.documents.length,
+                itemBuilder: (BuildContext context, int index) {
+                  var this_document = snapshot.data.documents[index];
+                  var product_name = this_document["name"];
+                  var product_image = this_document["image"];
+                  var product_price = this_document["price"];
+
+                  return Card(
+                      child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                        Expanded(
+                            child: Image(
+                                image: NetworkImage(
+                                    product_image),
+                                width: 200)),
+                        Text(product_name),
+                        Text(("Price: \$" + product_price.toString())),
+                        Padding(
+                            padding: EdgeInsets.only(bottom: 10),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Ink(
+                                    height: 20,
+                                    width: 20,
+                                    decoration: const ShapeDecoration(
+                                      color: Colors.orange,
+                                      shape: CircleBorder(),
+                                    ),
+                                    child: IconButton(
+                                      padding: EdgeInsets.all(0.0),
+                                      icon: Icon(Icons.remove, size: 20),
+                                      color: Colors.white,
+                                      onPressed: () {
+                                        updateCount(index, false);
+                                      },
+                                    )),
+                                Padding(
+                                    padding:
+                                        EdgeInsets.only(left: 20, right: 20),
+                                    child: Text(
+                                      food[index].count.toString(),
+                                      style: TextStyle(fontSize: 30.0),
+                                    )),
+                                Ink(
+                                    height: 20,
+                                    width: 20,
+                                    decoration: const ShapeDecoration(
+                                      color: Colors.orange,
+                                      shape: CircleBorder(),
+                                    ),
+                                    child: IconButton(
+                                      padding: EdgeInsets.all(0.0),
+                                      icon: Icon(Icons.add, size: 20),
+                                      color: Colors.white,
+                                      onPressed: () {
+                                        updateCount(index, true);
+                                      },
+                                    )),
+                              ],
+                            )),
+                      ]));
+                });
+          }),
+    );
   }
 }
 
@@ -302,24 +327,22 @@ class CartPageState extends State<CartPage> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Padding(
-                              padding: EdgeInsets.only(left: 15, right: 25),
-                              child:
-                            Text(
-                              foodItem.count.toStringAsFixed(0),
-                              style: TextStyle(fontSize: 20),
-                              textAlign: TextAlign.center,
-                            )),
+                                padding: EdgeInsets.only(left: 15, right: 25),
+                                child: Text(
+                                  foodItem.count.toStringAsFixed(0),
+                                  style: TextStyle(fontSize: 20),
+                                  textAlign: TextAlign.center,
+                                )),
                             Expanded(
-                              flex: 3,
+                                flex: 3,
                                 child: Align(
-                                  alignment: Alignment.center,
-                                  child:Text(foodItem.name.toString(),
-                                    overflow: TextOverflow.fade,
-                                    style: TextStyle(fontSize: 20)))),
-                                Padding(
-                                  padding: EdgeInsets.only(left: 25, right: 15),
-                                  child:
-                                Text("\$" + foodPrice.toStringAsFixed(2),
+                                    alignment: Alignment.center,
+                                    child: Text(foodItem.name.toString(),
+                                        overflow: TextOverflow.fade,
+                                        style: TextStyle(fontSize: 20)))),
+                            Padding(
+                                padding: EdgeInsets.only(left: 25, right: 15),
+                                child: Text("\$" + foodPrice.toStringAsFixed(2),
                                     style: TextStyle(fontSize: 20)))
                           ],
                         ));
