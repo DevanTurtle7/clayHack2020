@@ -1,10 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import "data.dart";
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:collection';
 
 final database = Firestore.instance;
+
+class Product {
+  final String name;
+  final double price;
+  var count = 0;
+
+  Product({this.name, this.price});
+}
+
+HashMap cart = new HashMap<String, Product>();
 
 void main() async {
   debugPaintSizeEnabled = false;
@@ -37,12 +47,12 @@ class GridPage extends StatefulWidget {
 class GridPageState extends State<GridPage> {
   double money;
 
-  void updateCount(index, add) {
+  void updateCount(name, add) {
     setState(() {
       if (add) {
-        food[index].count += 1;
-      } else if (food[index].count > 0) {
-        food[index].count -= 1;
+        cart[name].count += 1;
+      } else if (cart[name].count > 0) {
+        cart[name].count -= 1;
       }
 
       updateRemaining();
@@ -53,10 +63,10 @@ class GridPageState extends State<GridPage> {
     setState(() {
       money = (9.5 * widget.mealExchanges).toDouble();
 
-      for (Product product in food) {
-        money -= product.count * product.price;
-      }
-    });
+      cart.forEach((key, value) {
+        money -= value.count * value.price;
+      });
+      });
   }
 
   @override
@@ -105,6 +115,15 @@ class GridPageState extends State<GridPage> {
                   var product_image = this_document["image"];
                   var product_price = this_document["price"];
 
+                  if (cart[product_name] == null) {
+                    Product thisProduct = Product(name: product_name, price: product_price);
+
+                    cart[product_name] = thisProduct;
+                  }
+
+                  print(cart);
+                  print(cart[product_name].count);
+
                   return Card(
                       child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -133,14 +152,14 @@ class GridPageState extends State<GridPage> {
                                       icon: Icon(Icons.remove, size: 20),
                                       color: Colors.white,
                                       onPressed: () {
-                                        updateCount(index, false);
+                                        updateCount(product_name, false);
                                       },
                                     )),
                                 Padding(
                                     padding:
                                         EdgeInsets.only(left: 20, right: 20),
                                     child: Text(
-                                      food[index].count.toString(),
+                                     cart[product_name].count.toString(),
                                       style: TextStyle(fontSize: 30.0),
                                     )),
                                 Ink(
@@ -155,7 +174,7 @@ class GridPageState extends State<GridPage> {
                                       icon: Icon(Icons.add, size: 20),
                                       color: Colors.white,
                                       onPressed: () {
-                                        updateCount(index, true);
+                                        updateCount(product_name, true);
                                       },
                                     )),
                               ],
@@ -279,13 +298,12 @@ class CartPageState extends State<CartPage> {
   double price = 0;
 
   void updateCart() {
-    for (int index = 0; index < food.length; index++) {
-      if (food[index].count > 0) {
-        items.add(index);
-        print(food[index].price);
-        price += (food[index].count * food[index].price);
+    cart.forEach((key, value) {
+      if (value.count > 0) {
+        items.add(value);
+        price += (value.count * value.price);
       }
-    }
+    });
   }
 
   @override
@@ -318,7 +336,7 @@ class CartPageState extends State<CartPage> {
               child: ListView.builder(
                   itemCount: items.length,
                   itemBuilder: (context, index) {
-                    Product foodItem = food[items[index]];
+                    Product foodItem = cart[items[index].name];
                     var foodPrice = foodItem.count * foodItem.price;
                     return Padding(
                         padding: EdgeInsets.only(
