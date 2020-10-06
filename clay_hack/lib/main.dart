@@ -105,10 +105,11 @@ class GridPageState extends State<GridPage> {
       body: FutureBuilder(
           future: Firestore.instance.collection("products").getDocuments(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
               return new Center(child: CircularProgressIndicator());
-            }
-          else if (snapshot.connectionState == ConnectionState.done || snapshot.connectionState == ConnectionState.active) {
+          } else if (snapshot.connectionState == ConnectionState.none || !snapshot.hasData) {
+            return new Center(child: Text("There's nothing here :("),);
+          } else if (snapshot.connectionState == ConnectionState.done || snapshot.connectionState == ConnectionState.active || snapshot.hasData) {
             return GridView.builder(
                 gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
                     maxCrossAxisExtent: 300.0),
@@ -185,6 +186,8 @@ class GridPageState extends State<GridPage> {
                             )),
                       ]));
                 });
+          } else {
+            return new Center(child: Text("There was an error :("),);
           }
           }),
     );
