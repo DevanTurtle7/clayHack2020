@@ -14,7 +14,7 @@ Devan and Jose built corner clerk using Flutter, a software development framewor
 Jose was inexperienced with Flutter before today, but quickly picked it up over the course of the day. We were both a little overwhelmed at the beginning of the day with the task of creating an entire app in 8 hours, but we were able to pull it off.
 
 ## What's next for Corner Clerk
-We'd like to expand the reach of Corner Clerk and provide more items, more accurate pricing, more stores, and possibly even a barcode scanner.
+As more people use Corner Clerk, we gain more prices and data from the Corner Store. We plan to frequently add more products and prices. Additionally, we hpope to add dark mode soon!
 
 ## Built With
 Built with flutter, dart and firebase.
