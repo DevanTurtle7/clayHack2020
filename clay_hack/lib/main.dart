@@ -66,7 +66,7 @@ class GridPageState extends State<GridPage> {
       cart.forEach((key, value) {
         money -= value.count * value.price;
       });
-      });
+    });
   }
 
   @override
@@ -105,90 +105,97 @@ class GridPageState extends State<GridPage> {
       body: FutureBuilder(
           future: Firestore.instance.collection("products").getDocuments(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
               return new Center(child: CircularProgressIndicator());
-          } else if (snapshot.connectionState == ConnectionState.none || !snapshot.hasData) {
-            return new Center(child: Text("There's nothing here :("),);
-          } else if (snapshot.connectionState == ConnectionState.done || snapshot.connectionState == ConnectionState.active || snapshot.hasData) {
-            return GridView.builder(
-                gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                    maxCrossAxisExtent: 300.0),
-                itemCount: snapshot.data.documents.length,
-                itemBuilder: (BuildContext context, int index) {
-                  var this_document = snapshot.data.documents[index];
-                  var product_name = this_document["name"];
-                  var product_image = this_document["image"];
-                  var product_price = this_document["price"];
+            } else if (snapshot.connectionState == ConnectionState.none ||
+                !snapshot.hasData) {
+              return new Center(
+                child: Text("There's nothing here :("),
+              );
+            } else if (snapshot.connectionState == ConnectionState.done ||
+                snapshot.connectionState == ConnectionState.active ||
+                snapshot.hasData) {
+              return GridView.builder(
+                  gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                      maxCrossAxisExtent: 300.0),
+                  itemCount: snapshot.data.documents.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    var this_document = snapshot.data.documents[index];
+                    var product_name = this_document["name"];
+                    var product_image = this_document["image"];
+                    var product_price = this_document["price"];
 
-                  if (cart[product_name] == null) {
-                    Product thisProduct = Product(name: product_name, price: product_price);
+                    if (cart[product_name] == null) {
+                      Product thisProduct =
+                          Product(name: product_name, price: product_price);
 
-                    cart[product_name] = thisProduct;
-                  }
+                      cart[product_name] = thisProduct;
+                    }
 
-                  print(cart);
-                  print(cart[product_name].count);
+                    print(cart);
+                    print(cart[product_name].count);
 
-                  return Card(
-                      child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                        Expanded(
-                            child: Image(
-                                image: NetworkImage(
-                                    product_image),
-                                width: 200)),
-                        Text(product_name),
-                        Text(("Price: \$" + product_price.toString())),
-                        Padding(
-                            padding: EdgeInsets.only(bottom: 10),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Ink(
-                                    height: 20,
-                                    width: 20,
-                                    decoration: const ShapeDecoration(
-                                      color: Colors.orange,
-                                      shape: CircleBorder(),
-                                    ),
-                                    child: IconButton(
-                                      padding: EdgeInsets.all(0.0),
-                                      icon: Icon(Icons.remove, size: 20),
-                                      color: Colors.white,
-                                      onPressed: () {
-                                        updateCount(product_name, false);
-                                      },
-                                    )),
-                                Padding(
-                                    padding:
-                                        EdgeInsets.only(left: 20, right: 20),
-                                    child: Text(
-                                     cart[product_name].count.toString(),
-                                      style: TextStyle(fontSize: 30.0),
-                                    )),
-                                Ink(
-                                    height: 20,
-                                    width: 20,
-                                    decoration: const ShapeDecoration(
-                                      color: Colors.orange,
-                                      shape: CircleBorder(),
-                                    ),
-                                    child: IconButton(
-                                      padding: EdgeInsets.all(0.0),
-                                      icon: Icon(Icons.add, size: 20),
-                                      color: Colors.white,
-                                      onPressed: () {
-                                        updateCount(product_name, true);
-                                      },
-                                    )),
-                              ],
-                            )),
-                      ]));
-                });
-          } else {
-            return new Center(child: Text("There was an error :("),);
-          }
+                    return Card(
+                        child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                          Expanded(
+                              child: Image(
+                                  image: NetworkImage(product_image),
+                                  width: 200)),
+                          Text(product_name),
+                          Text(("Price: \$" + product_price.toString())),
+                          Padding(
+                              padding: EdgeInsets.only(bottom: 10),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Ink(
+                                      height: 20,
+                                      width: 20,
+                                      decoration: const ShapeDecoration(
+                                        color: Colors.orange,
+                                        shape: CircleBorder(),
+                                      ),
+                                      child: IconButton(
+                                        padding: EdgeInsets.all(0.0),
+                                        icon: Icon(Icons.remove, size: 20),
+                                        color: Colors.white,
+                                        onPressed: () {
+                                          updateCount(product_name, false);
+                                        },
+                                      )),
+                                  Padding(
+                                      padding:
+                                          EdgeInsets.only(left: 20, right: 20),
+                                      child: Text(
+                                        cart[product_name].count.toString(),
+                                        style: TextStyle(fontSize: 30.0),
+                                      )),
+                                  Ink(
+                                      height: 20,
+                                      width: 20,
+                                      decoration: const ShapeDecoration(
+                                        color: Colors.orange,
+                                        shape: CircleBorder(),
+                                      ),
+                                      child: IconButton(
+                                        padding: EdgeInsets.all(0.0),
+                                        icon: Icon(Icons.add, size: 20),
+                                        color: Colors.white,
+                                        onPressed: () {
+                                          updateCount(product_name, true);
+                                        },
+                                      )),
+                                ],
+                              )),
+                        ]));
+                  });
+            } else {
+              return new Center(
+                child: Text("There was an error :("),
+              );
+            }
           }),
     );
   }
