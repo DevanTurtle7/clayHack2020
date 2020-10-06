@@ -113,16 +113,16 @@ class GridPageState extends State<GridPage> {
                       maxCrossAxisExtent: 300.0),
                   itemCount: snapshot.data.documents.length,
                   itemBuilder: (BuildContext context, int index) {
-                    var this_document = snapshot.data.documents[index];
-                    var product_name = this_document["name"];
-                    var product_image = this_document["image"];
-                    var product_price = this_document["price"];
+                    var thisDocument = snapshot.data.documents[index];
+                    var productName = thisDocument["name"];
+                    var productImage = thisDocument["image"];
+                    var productPrice = thisDocument["price"];
 
-                    if (cart[product_name] == null) {
+                    if (cart[productName] == null) {
                       Product thisProduct =
-                          Product(name: product_name, price: product_price);
+                          Product(name: productName, price: productPrice);
 
-                      cart[product_name] = thisProduct;
+                      cart[productName] = thisProduct;
                     }
 
                     return Card(
@@ -131,10 +131,10 @@ class GridPageState extends State<GridPage> {
                             children: [
                           Expanded(
                               child: Image(
-                                  image: NetworkImage(product_image),
+                                  image: NetworkImage(productImage),
                                   width: 200)),
-                          Text(product_name),
-                          Text(("Price: \$" + product_price.toString())),
+                          Text(productName),
+                          Text(("Price: \$" + productPrice.toString())),
                           Padding(
                               padding: EdgeInsets.only(bottom: 10),
                               child: Row(
@@ -152,14 +152,14 @@ class GridPageState extends State<GridPage> {
                                         icon: Icon(Icons.remove, size: 20),
                                         color: Colors.white,
                                         onPressed: () {
-                                          updateCount(product_name, false);
+                                          updateCount(productName, false);
                                         },
                                       )),
                                   Padding(
                                       padding:
                                           EdgeInsets.only(left: 20, right: 20),
                                       child: Text(
-                                        cart[product_name].count.toString(),
+                                        cart[productName].count.toString(),
                                         style: TextStyle(fontSize: 30.0),
                                       )),
                                   Ink(
@@ -174,7 +174,7 @@ class GridPageState extends State<GridPage> {
                                         icon: Icon(Icons.add, size: 20),
                                         color: Colors.white,
                                         onPressed: () {
-                                          updateCount(product_name, true);
+                                          updateCount(productName, true);
                                         },
                                       )),
                                 ],
