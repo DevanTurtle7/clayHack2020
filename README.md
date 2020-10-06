@@ -2,7 +2,7 @@
 **ClayHack 2020 Winner!** Checkout the devpost page [here](https://devpost.com/software/corner-clerk)
 
 ## Updates
-**Corner Clerk is released for Android!** As of now, you can download it by going to the Downloads > Android folder and download the apk file.
+**Corner Clerk is released for Android!** As of now, you can download it by navigating to the releases section and downloading the apk.
 
 ## Purpose
 Shopping at the corner store can be difficult; you have to keep track of your meal exchanges, find what you're looking for, and sometimes the prices aren't even listed! Corner Clerk conveniently lists every item at the corner store and keeps track of your money for you.
