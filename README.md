@@ -17,4 +17,4 @@ Jose was inexperienced with Flutter before today, but quickly picked it up over 
 We'd like to expand the reach of Corner Clerk and provide more items, more accurate pricing, more stores, and possibly even a barcode scanner.
 
 ## Built With
-Built with flutter and dart.
+Built with flutter, dart and firebase.
