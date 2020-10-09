@@ -103,7 +103,7 @@ class GridPageState extends State<GridPage> {
         ],
       ),
       body: FutureBuilder(
-          future: Firestore.instance.collection("products").getDocuments(),
+          future: Firestore.instance.collection("products").orderBy("section").getDocuments(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.connectionState == ConnectionState.done ||
                 snapshot.connectionState == ConnectionState.active ||
