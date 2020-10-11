@@ -1,3 +1,4 @@
+import 'package:clay_hack/data.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -28,8 +29,14 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Corner Clerk',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.orange, //Main color
           visualDensity: VisualDensity.adaptivePlatformDensity,
+          primaryTextTheme: TextTheme(
+            headline6: TextStyle(color: Colors.white),
+          ), //
+          appBarTheme: AppBarTheme(
+            iconTheme: IconThemeData(color: Colors.white), //Appbar Icons Color
+          ),
         ),
         home: HomePage());
   }
@@ -82,28 +89,35 @@ class GridPageState extends State<GridPage> {
         return Text(snapshot.data.documents[0]["image"].toString());
       }
     ),);   */
+    updateRemaining();
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
           "Remaining: \$" + money.toStringAsFixed(2),
           overflow: TextOverflow.fade,
         ),
-        backgroundColor: Colors.orange,
         actions: [
           IconButton(
             icon: Icon(Icons.shopping_cart),
             onPressed: () {
               Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          CartPage(mealExchanges: widget.mealExchanges)));
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              CartPage(mealExchanges: widget.mealExchanges)))
+                  .whenComplete(() {
+                updateRemaining(); //Updates the page again when the user returns from the cart page incase they made any changes to the cart
+              });
             },
           )
         ],
       ),
       body: FutureBuilder(
-          future: Firestore.instance.collection("products").orderBy("section").getDocuments(),
+          future: Firestore.instance
+              .collection("products")
+              .orderBy("section")
+              .getDocuments(),
           builder: (BuildContext context, AsyncSnapshot snapshot) {
             if (snapshot.connectionState == ConnectionState.done ||
                 snapshot.connectionState == ConnectionState.active ||
@@ -223,7 +237,6 @@ class HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Corner Clerk"),
-        backgroundColor: Colors.orange,
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -310,11 +323,18 @@ class CartPageState extends State<CartPage> {
   double price = 0;
 
   void updateCart() {
+    items = [];
+    double newPrice = 0;
+
     cart.forEach((key, value) {
       if (value.count > 0) {
         items.add(value);
-        price += (value.count * value.price);
+        newPrice += (value.count * value.price);
       }
+    });
+
+    setState(() {
+      price = newPrice;
     });
   }
 
@@ -324,7 +344,6 @@ class CartPageState extends State<CartPage> {
     return Scaffold(
         appBar: AppBar(
           title: Text("Cart"),
-          backgroundColor: Colors.orange,
         ),
         body: Column(
           children: [
@@ -350,32 +369,56 @@ class CartPageState extends State<CartPage> {
                   itemBuilder: (context, index) {
                     Product foodItem = cart[items[index].name];
                     var foodPrice = foodItem.count * foodItem.price;
-                    return Padding(
-                        padding: EdgeInsets.only(
-                            left: 10, right: 10, top: 10, bottom: 10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Padding(
-                                padding: EdgeInsets.only(left: 15, right: 25),
-                                child: Text(
-                                  foodItem.count.toStringAsFixed(0),
-                                  style: TextStyle(fontSize: 20),
-                                  textAlign: TextAlign.center,
-                                )),
-                            Expanded(
-                                flex: 3,
-                                child: Align(
-                                    alignment: Alignment.center,
-                                    child: Text(foodItem.name.toString(),
-                                        overflow: TextOverflow.fade,
-                                        style: TextStyle(fontSize: 20)))),
-                            Padding(
-                                padding: EdgeInsets.only(left: 25, right: 15),
-                                child: Text("\$" + foodPrice.toStringAsFixed(2),
-                                    style: TextStyle(fontSize: 20)))
-                          ],
-                        ));
+                    return Dismissible(
+                        background: Container(color: Colors.red.shade400),
+                        key: Key(foodItem.name),
+                        onDismissed: (direction) {
+                          setState(() {
+                            foodItem.count = 0;
+                          });
+                          updateCart();
+                        },
+                        child: Container(
+                            decoration: BoxDecoration(
+                                border: Border(
+                                    top: BorderSide(
+                                        width: 0.5,
+                                        color: Colors.grey.shade200),
+                                    bottom: BorderSide(
+                                        width: 0.5,
+                                        color: Colors.grey.shade200))),
+                            child: Padding(
+                                padding: EdgeInsets.only(
+                                    left: 10, right: 10, top: 15, bottom: 15),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Padding(
+                                        padding: EdgeInsets.only(
+                                            left: 15, right: 25),
+                                        child: Text(
+                                          foodItem.count.toStringAsFixed(0),
+                                          style: TextStyle(fontSize: 20),
+                                          textAlign: TextAlign.center,
+                                        )),
+                                    Expanded(
+                                        flex: 3,
+                                        child: Align(
+                                            alignment: Alignment.center,
+                                            child: Text(
+                                                foodItem.name.toString(),
+                                                overflow: TextOverflow.fade,
+                                                style:
+                                                    TextStyle(fontSize: 20)))),
+                                    Padding(
+                                        padding: EdgeInsets.only(
+                                            left: 25, right: 15),
+                                        child: Text(
+                                            "\$" + foodPrice.toStringAsFixed(2),
+                                            style: TextStyle(fontSize: 20)))
+                                  ],
+                                ))));
                   }),
             ),
             Padding(
